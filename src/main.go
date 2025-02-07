@@ -10,6 +10,7 @@ func allocate(size int) [][]bool {
 	plate := make([][]bool, size)
 
 	for i := 0; i < size; i++ {
+
 		plate[i] = make([]bool, size)
 		for j := 0; j < size; j++ {
 			plate[i][j] = false
@@ -29,7 +30,20 @@ func is_safe(plate [][]bool, i int, j int, size int) bool {
 			return false
 		}
 	}
-	// Diagonals check :
+	for k := 1; k < size; k++ {
+		if i - k >= 0 && j - k >= 0 && plate[i - k][j - k] {
+			return false
+		}
+		if i + k < size && j - k >= 0 && plate[i + k][j - k] {
+			return false
+		}
+		if i + k < size && j + k < size && plate[i + k][j + k] {
+			return false
+		}
+		if i - k >= 0 && j + k < size && plate[i - k][j + k] {
+			return false
+		}
+	}
 	return true
 }
 
